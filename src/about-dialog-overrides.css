@@ -1,0 +1,62 @@
+/* SPDX-License-Identifier: MPL-2.0 */
+/* Silver Fox About dialog — neutral black and charcoal, no purple accent. */
+:root {
+  color-scheme: dark !important;
+  --in-content-page-background: #0b0b0d !important;
+  --in-content-page-color: #f5f5f6 !important;
+  --in-content-box-background: #16171a !important;
+  --in-content-button-background: #202126 !important;
+  --in-content-button-background-hover: #303137 !important;
+  --in-content-button-background-active: #404148 !important;
+  --in-content-primary-button-background: #303137 !important;
+  --in-content-primary-button-background-hover: #41434a !important;
+  --in-content-primary-button-text-color: #ffffff !important;
+  --in-content-link-color: #d8d8de !important;
+  --link-color: #d8d8de !important;
+  accent-color: #777b85 !important;
+  background-color: #0b0b0d !important;
+  color: #f5f5f6 !important;
+}
+
+html, body, window, dialog,
+#aboutDialog, #aboutDialogContainer, #clientBox, #container,
+#leftBox, #rightBox, #aboutName, #aboutVersion {
+  background-color: #0b0b0d !important;
+  color: #f5f5f6 !important;
+}
+
+#bottomBox, #bottomLinks, #bottomText, .bottom-links,
+.bottom-links-container {
+  background-color: #121317 !important;
+  color: #d8d8de !important;
+  border-color: #292a30 !important;
+}
+
+button, .button, menulist, select {
+  background: #232429 !important;
+  color: #f5f5f6 !important;
+  border: 1px solid #484a50 !important;
+  box-shadow: none !important;
+  accent-color: #777b85 !important;
+}
+button:hover, .button:hover {
+  background: #34363b !important;
+}
+button:active, .button:active {
+  background: #44464c !important;
+}
+
+a, .text-link, label[is="text-link"] {
+  color: #dedee2 !important;
+  text-decoration-color: #888990 !important;
+}
+a:hover, .text-link:hover, label[is="text-link"]:hover {
+  color: white !important;
+}
+
+/* Remove Mozilla-facing calls to action, not required attribution or license. */
+#releasenotes, #releaseNotes, #helpLink, #submit-feedback,
+#submitFeedback, #helpBox, #contribute, #get-involved,
+#donate, #bottomLinks, #bottomBox {
+  display: none !important;
+}

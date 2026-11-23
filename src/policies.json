@@ -1,0 +1,63 @@
+{
+  "policies": {
+    "DisableAppUpdate": true,
+    "DisableAccounts": true,
+    "DisableFirefoxAccounts": true,
+    "DisableFeedbackCommands": true,
+    "DisableFirefoxStudies": true,
+    "DisableTelemetry": true,
+    "DisablePocket": true,
+    "DisableProfileImport": true,
+    "DisableSetDesktopBackground": true,
+    "DisableFirefoxScreenshots": true,
+    "DisableRemoteImprovements": true,
+    "OfferToSaveLoginsDefault": false,
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "SearchSuggestEnabled": false,
+    "Homepage": {
+      "URL": "https://duckduckgo.com/",
+      "Locked": false,
+      "StartPage": "homepage"
+    },
+    "SearchBar": "separate",
+    "SearchEngines": {
+      "Default": "DuckDuckGo",
+      "PreventInstalls": false
+    },
+    "Preferences": {
+      "identity.fxaccounts.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.startup.homepage": {
+        "Value": "https://duckduckgo.com/",
+        "Status": "default"
+      },
+      "browser.newtabpage.enabled": {
+        "Value": false,
+        "Status": "default"
+      },
+      "extensions.pocket.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "app.normandy.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "app.shield.optoutstudies.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.discovery.enabled": {
+        "Value": false,
+        "Status": "locked"
+      }
+    }
+  }
+}

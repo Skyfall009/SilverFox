@@ -1,0 +1,48 @@
+/* SPDX-License-Identifier: MPL-2.0 */
+/* Silver Fox has no account provider or account synchronization service.
+   Do not show links and controls that invite sign-in to Mozilla accounts. */
+#category-sync,
+#syncPane,
+#category-account,
+#accountPane,
+#accountAndSync,
+#accountAndSyncCategory,
+#fxaLoginStatus,
+#fxaLoginStatusContainer,
+#fxaLoginButton,
+#syncComputerName,
+#syncSettings,
+#syncEngines,
+#syncDeviceName,
+#syncDisconnect,
+#syncSetup,
+#syncNow {
+  display: none !important;
+}
+
+/* macOS may call the repackaged application Firefox in its system default
+   browser confirmation even when the parent app's display name is changed.
+   Remove the misleading in-browser action; users may choose Silver Fox
+   explicitly from macOS System Settings instead. */
+#defaultBrowserBox,
+#defaultBrowserGroup,
+#defaultBrowserSettings,
+#defaultBrowserBanner,
+#defaultBrowserButton,
+#setDefaultBrowser,
+#defaultBrowserSection,
+#defaultBrowserLayout,
+.default-browser-banner,
+.defaultBrowserBanner {
+  display: none !important;
+}
+
+/* Keep settings controls neutral rather than upstream purple. */
+:root {
+  --in-content-primary-button-background: #292b30 !important;
+  --in-content-primary-button-background-hover: #3c3f45 !important;
+  --in-content-primary-button-background-active: #17181c !important;
+  --in-content-primary-button-text-color: #ffffff !important;
+  --in-content-accent-color: #44464b !important;
+  --in-content-accent-color-active: #222428 !important;
+}

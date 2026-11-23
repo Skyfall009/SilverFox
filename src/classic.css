@@ -1,0 +1,171 @@
+/* SPDX-License-Identifier: MPL-2.0 */
+/* Firefox 2 layout for the built-in browser window. */
+:root {
+  --classic-face: ButtonFace;
+  --classic-edge: color-mix(in srgb, ButtonText 30%, ButtonFace);
+  --classic-light: color-mix(in srgb, white 55%, ButtonFace);
+}
+
+#navigator-toolbox {
+  --toolbar-bgcolor: var(--classic-face);
+  --toolbar-color: ButtonText;
+  --toolbar-field-background-color: Field;
+  --toolbar-field-color: FieldText;
+  background: var(--classic-face);
+  color: ButtonText;
+}
+
+#toolbar-menubar, #nav-bar, #PersonalToolbar {
+  background: var(--classic-face);
+  border-bottom: 1px solid var(--classic-edge);
+}
+
+#toolbar-menubar {
+  min-height: 23px;
+}
+
+#main-menubar > menu {
+  padding-inline: 6px;
+}
+
+#nav-bar {
+  min-height: 34px;
+  box-shadow: inset 0 1px var(--classic-light);
+}
+
+#nav-bar :is(#back-button, #forward-button, #reload-button, #stop-button, #home-button) {
+  --toolbarbutton-inner-padding: 2px;
+  padding: 2px;
+}
+
+/* Navigation icons: neutral charcoal, never Firefox's purple accent.
+ * Gecko toolbar SVGs use context-fill; filters also neutralize any upstream
+ * SVGs with hard-coded purple fills. This is specific to the nav controls. */
+#nav-bar :is(#back-button, #forward-button, #reload-button, #stop-button, #home-button) {
+  color: #292b30 !important;
+  --toolbarbutton-icon-fill: #292b30;
+}
+
+#nav-bar :is(#back-button, #forward-button, #reload-button, #stop-button, #home-button) > .toolbarbutton-icon {
+  box-sizing: content-box;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  -moz-context-properties: fill, fill-opacity;
+  fill: #292b30 !important;
+  color: #292b30 !important;
+  filter: grayscale(1) brightness(.42) !important;
+  opacity: 1;
+}
+
+/* Disabled Back / Forward / Stop stay light gray, not purple. */
+#nav-bar :is(#back-button, #forward-button, #reload-button, #stop-button, #home-button):is([disabled], :disabled) > .toolbarbutton-icon {
+  filter: grayscale(1) !important;
+  fill: #a7aab1 !important;
+  color: #a7aab1 !important;
+  opacity: .42 !important;
+}
+
+#nav-bar #stop-reload-button > :is(#reload-button, #stop-button) {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+#nav-bar:not([customizing]) #urlbar-container {
+  min-width: 12em;
+}
+
+#urlbar, #search-container {
+  --toolbar-field-border-color: var(--classic-edge);
+  --toolbar-field-focus-border-color: Highlight;
+  --border-radius-medium: 2px;
+  --border-radius-small: 2px;
+}
+
+#search-container {
+  min-width: 7em;
+  max-width: 18em;
+}
+
+#PersonalToolbar:not([collapsed]) {
+  min-height: 23px;
+}
+
+#TabsToolbar {
+  --tab-min-height: 25px;
+  background: var(--classic-face);
+  border-bottom: 1px solid var(--classic-edge);
+}
+
+#TabsToolbar .tabbrowser-tab {
+  padding-inline: 1px;
+}
+
+#TabsToolbar .tab-background {
+  margin-block: 1px 0;
+  border: 1px solid var(--classic-edge);
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(var(--classic-light), var(--classic-face));
+  box-shadow: none;
+}
+
+#TabsToolbar .tab-background:is([selected], [multiselected]) {
+  background: linear-gradient(var(--classic-light), Field);
+}
+
+#TabsToolbar .tab-content {
+  padding-inline: 7px;
+  color: ButtonText;
+}
+
+#TabsToolbar .tab-close-button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 0;
+}
+
+#classic-status-bar {
+  position: relative;
+  min-height: 21px;
+  flex-shrink: 0;
+  background: var(--classic-face);
+  color: ButtonText;
+  border-top: 1px solid var(--classic-edge);
+  box-shadow: inset 0 1px var(--classic-light);
+}
+
+:root[inFullscreen] #classic-status-bar {
+  display: none;
+}
+
+#classic-status-bar > #statuspanel {
+  position: static;
+  inset: auto;
+  margin: 0;
+  flex: 1;
+  pointer-events: none;
+}
+
+#classic-status-bar #statuspanel-label {
+  background: none;
+  color: inherit;
+  border: 0;
+  padding: 1px 5px;
+}
+
+/* Hide the VPN widget even when an existing profile has placed it on a toolbar. */
+#ipprotection-button,
+#wrapper-ipprotection-button {
+  display: none !important;
+}
+
+
+/* Hide account / sync entry points. */
+#fxa-toolbar-menu-button,
+#wrapper-fxa-toolbar-menu-button,
+#sync-button,
+#wrapper-sync-button {
+  display: none !important;
+}

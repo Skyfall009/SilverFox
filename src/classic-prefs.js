@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: MPL-2.0
+pref("browser.tabs.inTitlebar", 0);
+pref("browser.search.widget.inNavBar", true);
+pref("keyword.enabled", false);
+pref("browser.urlbar.suggest.searches", false);
+pref("browser.urlbar.suggest.engines", false);
+pref("browser.urlbar.suggest.recentsearches", false);
+pref("browser.urlbar.suggest.trending", false);
+pref("browser.urlbar.searchModeSwitcher.featureGate", false);
+
+pref("browser.startup.homepage", "https://duckduckgo.com/");
+pref("browser.newtabpage.enabled", false);
+pref("identity.fxaccounts.enabled", false);
+pref("services.sync.engine.addons", false);
+pref("services.sync.engine.addresses", false);
+pref("services.sync.engine.bookmarks", false);
+pref("services.sync.engine.creditcards", false);
+pref("services.sync.engine.history", false);
+pref("services.sync.engine.passwords", false);
+pref("services.sync.engine.prefs", false);
+pref("services.sync.engine.tabs", false);
+pref("toolkit.telemetry.enabled", false);
+pref("toolkit.telemetry.unified", false);
+pref("toolkit.telemetry.archive.enabled", false);
+pref("datareporting.healthreport.uploadEnabled", false);
+pref("datareporting.policy.dataSubmissionEnabled", false);
+pref("app.shield.optoutstudies.enabled", false);
+pref("app.normandy.enabled", false);
+pref("app.normandy.api_url", "");
+pref("browser.ping-centre.telemetry", false);
+pref("browser.newtabpage.activity-stream.telemetry", false);
+pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
+pref("browser.discovery.enabled", false);
+pref("extensions.pocket.enabled", false);
+pref("browser.tabs.crashReporting.sendReport", false);
+pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
+pref("browser.crashReports.unsubmittedCheck.enabled", false);
+pref("breakpad.reportURL", "");
+pref("browser.urlbar.quicksuggest.enabled", false);
+pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
+pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+pref("browser.search.suggest.enabled", false);
+pref("browser.startup.firstrunSkipsHomepage", false);
+pref("browser.aboutwelcome.enabled", false);
+pref("browser.startup.homepage_override.mstone", "ignore");
+pref("startup.homepage_override_url", "");
+pref("startup.homepage_welcome_url", "");
+pref("startup.homepage_welcome_url.additional", "");
+
+// Avoid a macOS default-browser prompt naming the upstream application.
+pref("browser.shell.checkDefaultBrowser", false);
