@@ -129,6 +129,15 @@ def register_app_with_launch_services(app):
             print("Warning: macOS did not refresh Launch Services registration.", file=sys.stderr)
 
 
+def compile_launcher(contents):
+    """Build the native startup guard that pins Silver Fox to its own profile."""
+    target = contents / "MacOS" / "SilverFoxLauncher"
+    source = PROJECT / "src" / "silverfox_launcher.c"
+    run("xcrun", "clang", "-std=c11", "-Wall", "-Wextra", "-Werror", "-O2",
+        "-mmacosx-version-min=11.0", source, "-o", target)
+    return target
+
+
 def prepare_app(app):
     contents = app / "Contents"
     patch_application_ini(contents)
@@ -140,13 +149,14 @@ def prepare_app(app):
     info["CFBundleGetInfoString"] = "Silver Fox, an independent browser based on Firefox"
     info["LSHasLocalizedDisplayName"] = True
     patch_browser_handler_names(info)
-    # Keep the original Mozilla entrypoint. macOS may terminate Firefox with
-    # SIGKILL when the code-signed executable is launched as a helper instead
-    # of the CFBundleExecutable recorded by Launch Services.
-    info["CFBundleExecutable"] = "firefox"
+    # A native entrypoint enforces profile isolation for Finder and Dock starts.
+    # Unlike a shell launcher it is a real Mach-O binary signed as the bundle
+    # executable. The bundled Firefox engine remains unrenamed.
+    info["CFBundleExecutable"] = "SilverFoxLauncher"
     info.pop("CFBundleIconName", None)
     plist_path.write_bytes(plistlib.dumps(info, sort_keys=False))
     fix_localized_app_names(contents)
+    compile_launcher(contents)
 
     # The official Firefox executable has Mozilla production entitlements
     # including restricted capabilities (e.g. passkey-related entitlements).
@@ -164,11 +174,15 @@ def prepare_app(app):
     with tempfile.TemporaryDirectory(prefix="silverfox-sign-") as signing_dir:
         entitlements_path = Path(signing_dir) / "local-entitlements.plist"
         entitlements_path.write_bytes(plistlib.dumps(local_entitlements))
-        # Signing the outer app also re-signs its main firefox executable.
-        # Do not preserve production entitlements/flags, and do not use --deep
-        # to re-sign the separately signed Mozilla helper applications.
+        # The upstream executable is now nested, not CFBundleExecutable.
+        # Its Mozilla-issued signature cannot be retained after patching the
+        # app; ad-hoc sign it WITHOUT restricted Mozilla entitlements.
         run("codesign", "--force", "--sign", "-",
-            "--entitlements", entitlements_path, app)
+            "--entitlements", entitlements_path,
+            contents / "MacOS" / "firefox")
+        # Sign our launcher and the outer bundle separately. Do not use
+        # --deep to re-sign Mozilla's separately signed helper applications.
+        run("codesign", "--force", "--sign", "-", app)
     run("codesign", "--verify", "--deep", "--strict", "--verbose=2", app)
 
 

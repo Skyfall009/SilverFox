@@ -1,12 +1,12 @@
 #!/bin/sh
-# Launch Silver Fox with a separate profile without modifying the signed app.
+# SPDX-License-Identifier: MPL-2.0
+# Compatibility helper. The signed native app launcher is the single source
+# of truth for profile isolation, even when launching from a terminal.
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-APP="$ROOT/build/Silver Fox.app"
-PROFILE="$HOME/Library/Application Support/Silver Fox/Profile"
-if [ ! -f "$APP/Contents/Info.plist" ]; then
-    echo "Missing $APP. Run python3 build.py first." >&2
+LAUNCHER="$ROOT/build/Silver Fox.app/Contents/MacOS/SilverFoxLauncher"
+if [ ! -x "$LAUNCHER" ]; then
+    echo "Missing $LAUNCHER. Run python3 build.py first." >&2
     exit 1
 fi
-mkdir -p "$PROFILE"
-exec "$APP/Contents/MacOS/firefox" --no-remote --profile "$PROFILE" "$@"
+exec "$LAUNCHER" "$@"
